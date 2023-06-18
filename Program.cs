@@ -1,4 +1,5 @@
-﻿namespace gomokuApp;
+﻿using gomokuApp.Core;
+namespace gomokuApp;
 
 internal static class Program
 {

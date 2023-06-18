@@ -1,4 +1,4 @@
-namespace gomokuApp;
+namespace gomokuApp.Core;
 
 /// <summary>
 /// ボード探索用
