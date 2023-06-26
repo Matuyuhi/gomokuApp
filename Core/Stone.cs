@@ -15,7 +15,7 @@ public class Stone
     }
 
     public static readonly Stone None = new ("　");
-    public static readonly Stone White = new ("●");
+    public static readonly Stone White = new ("⚫︎");
     public static readonly Stone Black = new ("〇");
 }
 

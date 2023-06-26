@@ -43,6 +43,9 @@ public class Gomoku
     /// </summary>
     private readonly bool isDebug = false;
 
+    private Move? beforeCom;
+    private Move? beforePlayer;
+
     public Gomoku()
     {
         board = new Stone[vMax, hMax];
@@ -58,7 +61,7 @@ public class Gomoku
         }
     }
 
-    private static void PrintBoard(Stone[,] printBoard)
+    private void PrintBoard(Stone[,] printBoard)
     {
         int rows = printBoard.GetLength(0);
         int columns = printBoard.GetLength(1);
@@ -82,7 +85,25 @@ public class Gomoku
 
             for (int h = 0; h < columns; h++)
             {
-                Console.Write("{0}", printBoard[v, h].GetPutStone());
+                // 直前の手は色を変える
+                if (beforeCom != null && 
+                    beforeCom.Value.X == v && beforeCom.Value.Y == h
+                ) {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("{0}", printBoard[v, h].GetPutStone());
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (beforePlayer != null &&
+                         beforePlayer.Value.X == v && beforePlayer.Value.Y == h
+                ) {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("{0}", printBoard[v, h].GetPutStone());
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.Write("{0}", printBoard[v, h].GetPutStone());
+                }
                 Console.Write("|");
             }
 
@@ -106,10 +127,11 @@ public class Gomoku
         return match.Count != 0;
     }
 
-    private void RemoveFreeList(int index)
-    {
-        freeList.RemoveAt(index);
-    }
+    // 未使用
+    // private void RemoveFreeList(int index)
+    // {
+    //     freeList.RemoveAt(index);
+    // }
 
     private void RemoveFreeList(Move val)
     {
@@ -144,6 +166,11 @@ public class Gomoku
     {
         Move moveIndex = freeList[index];
         board[moveIndex.X, moveIndex.Y] = stone;
+    }
+    
+    private Move GetFreeMove(int index)
+    {
+        return freeList[index];
     }
         
 
@@ -250,8 +277,13 @@ public class Gomoku
 
         if (bestMove != -1)
         {
+            beforeCom = GetFreeMove(bestMove);
             SetStone(bestMove, comStone);
             freeList.RemoveAt(bestMove);
+        }
+        else
+        {
+            beforeCom = null;
         }
     }
 
@@ -408,6 +440,7 @@ public class Gomoku
             if (OnFree(ver, hor))
             {
                 SetStone(ver, hor, playerStone);
+                beforePlayer = new Move(ver, hor);
                 if (IsMatchInBoard(playerStone, board))
                 {
                     if (isClear) Console.Clear();

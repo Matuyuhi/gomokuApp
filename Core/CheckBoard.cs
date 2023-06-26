@@ -44,131 +44,155 @@ public static class CheckBoard
             {
                 { 2, 1, 1, 1, 1, 2 }
             },
-            BlockType.Open, 9000),
+            9000),
         new(
             new[,]
             {
                 { 1, 1, 1, 1, 2 }
             },
-            BlockType.Open, 8000),
+            8000),
         new(
             new[,]
             {
                 { 2, 1, 1, 1, 1 }
             },
-            BlockType.Open, 8000),
+            8000),
+        new(
+            new[,]
+            {
+                { 1, 1, 1, 2, 1 }
+            },
+            8000),
+        new(
+            new[,]
+            {
+                { 1, 2, 1, 1, 1 }
+            },
+            8000),
          new(
             new[,]
             {
                 { 1, 1, 2, 1, 1 }
             },
-            BlockType.Open, 7500),
+            7500),
 
         new(
             new[,]
             {
                 { 1, 1, 2, 1 }
             },
-            BlockType.Open, 7000),
+            7000),
         new(
             new[,]
             {
                 { 1, 2, 1, 1 }
             },
-            BlockType.Open,7000),
+            7000),
         new(
             new[,]
             {
-                {2, 1, 1, 1 }
+                {2, 1, 1, 1, 0 }
             },
-            BlockType.Open, 6000),
+            6000),
         new(
             new[,]
             {
-                {1, 1, 1, 2 }
+                { 0, 1, 1, 1, 2 }
             },
-            BlockType.Open, 6000),
+            6000),
         new(
             new[,]
             {
-                {2, 1, 1, 1, 2 }
+                { 0, 2, 1, 1, 1, 2 }
             },
-            BlockType.Open, 1000),
+            1000),
+        new(
+            new[,]
+            {
+                { 2, 1, 1, 1, 2, 0 }
+            },
+            1000),
       
 
         // 攻めの手
         new(
             new[,]
             {
+                { 2, 2, 2, 2, 2 }
+            },
+            50000),
+        new(
+            new[,]
+            {
                 { 0, 2, 2, 2, 2, 0 }
             },
-            BlockType.Open, 9000),
+            10000),
         new(
             new[,]
             {
                 { 2, 2, 2, 2, 0 }
             },
-            BlockType.Open, 5000),
+            5000),
         new(
             new[,]
             {
                 { 0, 2, 2, 2, 2 }
             },
-            BlockType.Open, 5000),
+            5000),
         new(
             new[,]
             {
                 { 0, 2, 2, 2, 0 }
             },
-            BlockType.Open, 3000),
+            3000),
         new(
             new[,]
             {
                 { 0, 0, 2, 2, 2 }
             },
-            BlockType.Open, 3000),
+            3000),
         new(
             new[,]
             {
                 { 2, 2, 2, 0, 0 }
             },
-            BlockType.Open, 2000),
+            2000),
         new(
             new[,]
             {
                 {2, 2, 0, 2, 0 }
             },
-            BlockType.Open, 1500),
+            1500),
         new(
             new[,]
             {
                 { 0, 2, 2, 0, 2 }
             },
-            BlockType.Open, 1200),
+            1200),
         new(
             new[,]
             {
                 {2, 2, 0, 2 }
             },
-            BlockType.Open, 400),
+            400),
         new(
             new[,]
             {
                 {2, 2, 0, 2, 2 }
             },
-            BlockType.Open, 400),
+            400),
         new(
             new[,]
             {
                 {2, 2, 0, 0, 0 }
             },
-            BlockType.Open, 225),
+            225),
         new(
             new[,]
             {
                 {0, 0, 0, 2, 2 }
             },
-            BlockType.Open, 225),
+            225),
 
         // 優先度低い守り
           new(
@@ -176,13 +200,13 @@ public static class CheckBoard
             {
                 {2, 1, 1 }
             },
-            BlockType.Open, 100),
+            100),
          new(
             new[,]
             {
                 {1, 1, 2 }
             },
-            BlockType.Open, 100),
+             100),
 
 
 
@@ -406,7 +430,6 @@ public static class CheckBoard
 
         return new Pattern(
             pattern,
-            a.Type,
             -1 * a.Score
         );
 
@@ -414,24 +437,15 @@ public static class CheckBoard
 }
 
 
-public enum BlockType
-{
-    Open,
-    Block,
-    None,
-}
-
 public struct Pattern
 {
     public int Score { init; get; } = 0;
     public int[,] Value { get; }
-    public BlockType Type { get; }
 
-    public Pattern(int[,] value, BlockType type, int score)
+    public Pattern(int[,] value, int score)
     {
         Score = score;
-
-        Type = type;
+        
 
         Value = value;
     }
