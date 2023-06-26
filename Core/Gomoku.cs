@@ -85,25 +85,27 @@ public class Gomoku
 
             for (int h = 0; h < columns; h++)
             {
+                Console.BackgroundColor = printBoard[v, h] == comStone ? ConsoleColor.White : ConsoleColor.Black;
+                Console.ForegroundColor = printBoard[v, h] == comStone ? ConsoleColor.Black : ConsoleColor.White;
                 // 直前の手は色を変える
                 if (beforeCom != null && 
                     beforeCom.Value.X == v && beforeCom.Value.Y == h
                 ) {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("{0}", printBoard[v, h].GetPutStone());
-                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (beforePlayer != null &&
                          beforePlayer.Value.X == v && beforePlayer.Value.Y == h
                 ) {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("{0}", printBoard[v, h].GetPutStone());
-                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     Console.Write("{0}", printBoard[v, h].GetPutStone());
                 }
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("|");
             }
 
