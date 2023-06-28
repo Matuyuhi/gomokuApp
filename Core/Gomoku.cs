@@ -5,12 +5,12 @@ public class Gomoku
     /// <summary>
     /// 表示用のボード
     /// </summary>
-    private readonly Stone[,] board;
+    private Stone[,] board = default!;
 
     /// <summary>
     /// 何も置かれていないマスのリスト
     /// </summary>
-    private readonly List<Move> freeList;
+    private List<Move> freeList = default!;
 
     /// <summary>
     /// ボードサイズ
@@ -36,18 +36,30 @@ public class Gomoku
     /// <summary>
     /// 毎回画面をクリアにする
     /// </summary>
-    private readonly bool isClear = false;
+    private readonly bool isClear;
 
     /// <summary>
     /// 探索のデバッグ用
     /// </summary>
-    private readonly bool isDebug = false;
+    private readonly bool isDebug;
 
     private Move? beforeCom;
     private Move? beforePlayer;
 
-    public Gomoku()
+    public Gomoku(bool clearFlag = false, bool debugFlag = false)
     {
+        isClear = clearFlag;
+        isDebug = debugFlag;
+        
+        // board = new Stone[vMax, hMax];
+        // freeList = new List<Move>(vMax * hMax);
+    }
+
+    private void Init()
+    {
+        beforeCom = null;
+        beforePlayer = null;
+        
         board = new Stone[vMax, hMax];
         freeList = new List<Move>(vMax * hMax);
 
@@ -396,6 +408,7 @@ public class Gomoku
     /// </summary>
     public void Start()
     {
+        Init();
         Console.Clear();
         while (true)
         {

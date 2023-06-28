@@ -3,11 +3,25 @@ namespace gomokuApp;
 
 internal static class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
+        Gomoku gomoku;
+        if (args.Length == 1)
+        {
+            gomoku = args[0] switch
+            {
+                "debug" => new Gomoku(false, true),
+                "release" => new Gomoku(true),
+                _ => new Gomoku()
+            };
+        }
+        else
+        {
+            gomoku = new Gomoku();
+        }
+        
         do
         {
-            var gomoku = new Gomoku();
             gomoku.Start();
 
             Console.Write("もう一度遊びますか？ [y:n] ");
