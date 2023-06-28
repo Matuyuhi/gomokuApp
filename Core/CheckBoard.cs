@@ -24,12 +24,12 @@ public static class CheckBoard
     /// <summary>
     /// 最大スコア
     /// </summary>
-    public const int MaxScore = 100000;
+    public const int MaxScore = 900000;
 
     /// <summary>
     /// 最小スコア
     /// </summary>
-    public const int MinScore = -100000;
+    public const int MinScore = -900000;
 
     /// <summary>
     /// 2 : player
@@ -44,19 +44,19 @@ public static class CheckBoard
             {
                 { 2, 1, 1, 1, 1, 2 }
             },
-            9000),
+            13000),
         new(
             new[,]
             {
                 { 1, 1, 1, 1, 2 }
             },
-            8000),
+            11000),
         new(
             new[,]
             {
                 { 2, 1, 1, 1, 1 }
             },
-            8000),
+            11000),
         new(
             new[,]
             {
@@ -91,13 +91,13 @@ public static class CheckBoard
         new(
             new[,]
             {
-                { 2, 1, 1, 1, 0 }
+                { 2, 1, 1, 1, 0, 0 }
             },
             6000),
         new(
             new[,]
             {
-                { 0, 1, 1, 1, 2 }
+                { 0, 0, 1, 1, 1, 2 }
             },
             6000),
         new(
@@ -120,7 +120,7 @@ public static class CheckBoard
             {
                 { 2, 2, 2, 2, 2 }
             },
-            13000),
+            53000),
         new(
             new[,]
             {
