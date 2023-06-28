@@ -14,17 +14,18 @@ public static class CheckBoard
     /// comの石の色
     /// </summary>
     public static readonly Stone ComStone = Stone.Black;
-    
+
     /// <summary>
     /// 探索する深さ
     /// 0以上
     /// </summary>
-    public const int SearchDepth = 1
-        ;
+    public const int SearchDepth = 1;
+
     /// <summary>
     /// 最大スコア
     /// </summary>
     public const int MaxScore = 100000;
+
     /// <summary>
     /// 最小スコア
     /// </summary>
@@ -37,7 +38,6 @@ public static class CheckBoard
     /// </summary>
     private static readonly Pattern[] BlockPatterns =
     {
-
         // 防ぐ手
         new(
             new[,]
@@ -69,7 +69,7 @@ public static class CheckBoard
                 { 1, 2, 1, 1, 1 }
             },
             8000),
-         new(
+        new(
             new[,]
             {
                 { 1, 1, 2, 1, 1 }
@@ -91,7 +91,7 @@ public static class CheckBoard
         new(
             new[,]
             {
-                {2, 1, 1, 1, 0 }
+                { 2, 1, 1, 1, 0 }
             },
             6000),
         new(
@@ -112,7 +112,7 @@ public static class CheckBoard
                 { 2, 1, 1, 1, 2, 0 }
             },
             1000),
-      
+
 
         // 攻めの手
         new(
@@ -120,13 +120,13 @@ public static class CheckBoard
             {
                 { 2, 2, 2, 2, 2 }
             },
-            50000),
+            13000),
         new(
             new[,]
             {
                 { 0, 2, 2, 2, 2, 0 }
             },
-            10000),
+            6000),
         new(
             new[,]
             {
@@ -160,7 +160,7 @@ public static class CheckBoard
         new(
             new[,]
             {
-                {2, 2, 0, 2, 0 }
+                { 2, 2, 0, 2, 0 }
             },
             1500),
         new(
@@ -172,45 +172,41 @@ public static class CheckBoard
         new(
             new[,]
             {
-                {2, 2, 0, 2 }
+                { 2, 2, 0, 2 }
             },
             400),
         new(
             new[,]
             {
-                {2, 2, 0, 2, 2 }
+                { 2, 2, 0, 2, 2 }
             },
             400),
         new(
             new[,]
             {
-                {2, 2, 0, 0, 0 }
+                { 2, 2, 0, 0, 0 }
             },
             225),
         new(
             new[,]
             {
-                {0, 0, 0, 2, 2 }
+                { 0, 0, 0, 2, 2 }
             },
             225),
 
         // 優先度低い守り
-          new(
+        new(
             new[,]
             {
-                {2, 1, 1 }
+                { 2, 1, 1 }
             },
             100),
-         new(
+        new(
             new[,]
             {
-                {1, 1, 2 }
+                { 1, 1, 2 }
             },
-             100),
-
-
-
-
+            100),
     };
 
     /// <summary>
@@ -391,7 +387,7 @@ public static class CheckBoard
                 score += switchPattern.Score;
             }
         }
-        
+
 
         return score;
     }
@@ -412,7 +408,8 @@ public static class CheckBoard
         int xLength = a.Value.GetLength(1);
         int yLength = a.Value.GetLength(0);
         int[,] pattern = new int[yLength, xLength];
-        for(int y = 0; y < yLength; y++ ){
+        for (int y = 0; y < yLength; y++)
+        {
             for (int x = 0; x < xLength; x++)
             {
                 int val = a.Value[y, x];
@@ -424,6 +421,7 @@ public static class CheckBoard
                 {
                     val = 1;
                 }
+
                 pattern[y, x] = val;
             }
         }
@@ -432,10 +430,8 @@ public static class CheckBoard
             pattern,
             -1 * a.Score
         );
-
     }
 }
-
 
 public struct Pattern
 {
@@ -445,7 +441,7 @@ public struct Pattern
     public Pattern(int[,] value, int score)
     {
         Score = score;
-        
+
 
         Value = value;
     }
